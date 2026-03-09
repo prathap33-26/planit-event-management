@@ -1,101 +1,75 @@
-body{
-margin:0;
-font-family:Poppins, sans-serif;
-background:#0b0f1a;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-color:white;
+/* Page Background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  min-height: 100vh;
 }
 
-.auth-container{
-width:100%;
-display:flex;
-justify-content:center;
+/* Dashboard Container */
+.dashboard-container {
+  padding: 40px;
 }
 
-.auth-card{
-background:#11152a;
-padding:40px;
-border-radius:16px;
-width:420px;
-box-shadow:0 10px 40px rgba(0,0,0,0.6);
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  margin-bottom: 30px;
 }
 
-.subtitle{
-color:#9aa4c7;
-margin-bottom:20px;
+/* Task Card */
+.task-card {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  max-width: 700px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
 }
 
-label{
-display:block;
-margin-top:15px;
-font-size:12px;
-color:#8f98b3;
+.task-card:hover {
+  transform: translateY(-5px);
 }
 
-input{
-width:100%;
-padding:12px;
-margin-top:6px;
-border:none;
-border-radius:8px;
-background:#1a1f38;
-color:white;
+/* Task Title */
+.task-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
 }
 
-.primary-btn{
-width:100%;
-padding:14px;
-margin-top:25px;
-border:none;
-border-radius:10px;
-background:linear-gradient(90deg,#b06cff,#7c5cff);
-color:white;
-font-size:16px;
-cursor:pointer;
+/* Task Description */
+.task-desc {
+  color: #555;
+  margin: 10px 0;
 }
 
-.error{
-background:#2b1d25;
-border:1px solid #a04b5f;
-color:#ff8fa3;
-padding:10px;
-border-radius:8px;
-margin-bottom:15px;
+/* Status Text */
+.status-text {
+  font-weight: bold;
 }
 
-.switch{
-text-align:center;
-margin-top:20px;
-color:#9aa4c7;
+/* Dropdown */
+.status-select {
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 
-.demo{
-margin-top:20px;
-background:#151a33;
-padding:20px;
-border-radius:10px;
+/* Status Colors */
+.pending {
+  color: #ff9800;
 }
 
-.demo-title{
-font-size:12px;
-margin-bottom:10px;
-color:#7d86a8;
+.progress {
+  color: #2196f3;
 }
 
-.demo-btn{
-width:100%;
-padding:10px;
-margin-top:8px;
-border:none;
-border-radius:8px;
-background:#1f2546;
-color:white;
-cursor:pointer;
-}
-
-.demo-btn:hover{
-background:#2a3170;
+.completed {
+  color: #4caf50;
 }
