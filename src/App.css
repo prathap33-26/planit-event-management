@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Page Background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  padding: 40px;
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
   color: white;
+  font-size: 32px;
+  margin-bottom: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Task Card */
+.task-card {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  max-width: 700px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Task Title */
+.task-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Task Description */
+.task-desc {
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Status Text */
+.status-text {
+  font-weight: bold;
+}
+
+/* Dropdown */
+.status-select {
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Status Colors */
+.pending {
+  color: #ff9800;
+}
+
+.progress {
+  color: #2196f3;
+}
+
+.completed {
+  color: #4caf50;
 }
