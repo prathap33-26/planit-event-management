@@ -1,0 +1,333 @@
+/* =========================
+GLOBAL RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter','Segoe UI',sans-serif;
+}
+
+/* =========================
+BODY BACKGROUND
+========================= */
+
+body{
+min-height:100vh;
+color:#1e293b;
+
+/* Modern gradient background */
+
+background:
+radial-gradient(circle at 20% 20%, rgba(99,102,241,0.15), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(168,85,247,0.15), transparent 40%),
+radial-gradient(circle at 50% 80%, rgba(59,130,246,0.15), transparent 40%),
+#f8fafc;
+
+background-attachment:fixed;
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 60px;
+
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+
+border-bottom:1px solid rgba(0,0,0,0.05);
+
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.navbar h2{
+font-size:24px;
+font-weight:700;
+color:#4f46e5;
+letter-spacing:1px;
+}
+
+.nav-links{
+display:flex;
+gap:28px;
+list-style:none;
+}
+
+.nav-links a{
+color:#374151;
+text-decoration:none;
+font-weight:500;
+font-size:15px;
+position:relative;
+transition:0.3s;
+}
+
+/* Hover underline animation */
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-4px;
+width:0%;
+height:2px;
+background:#6366f1;
+transition:0.3s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+.nav-links a:hover{
+color:#4f46e5;
+}
+
+/* =========================
+CONTAINER
+========================= */
+
+.container{
+padding:50px;
+max-width:1200px;
+margin:auto;
+}
+
+/* =========================
+GRID
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+/* =========================
+GLASS CARD
+========================= */
+
+.card{
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(10px);
+
+padding:28px;
+border-radius:14px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.08),
+0 1px 2px rgba(0,0,0,0.05);
+
+transition:0.35s;
+}
+
+.card:hover{
+transform:translateY(-6px) scale(1.01);
+box-shadow:
+0 18px 45px rgba(0,0,0,0.12);
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.btn{
+background:linear-gradient(135deg,#6366f1,#8b5cf6);
+color:white;
+
+border:none;
+padding:12px 20px;
+
+border-radius:8px;
+cursor:pointer;
+
+font-weight:600;
+letter-spacing:0.3px;
+
+box-shadow:0 6px 15px rgba(99,102,241,0.4);
+
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(99,102,241,0.5);
+}
+
+/* =========================
+FORM
+========================= */
+
+.form-group{
+display:flex;
+flex-direction:column;
+margin-bottom:18px;
+}
+
+.form-group label{
+margin-bottom:6px;
+font-weight:500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+padding:11px 12px;
+
+border:1px solid #e5e7eb;
+border-radius:8px;
+
+background:white;
+
+transition:0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+
+outline:none;
+border-color:#6366f1;
+
+box-shadow:0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* =========================
+TABLE
+========================= */
+
+.table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+background:white;
+border-radius:12px;
+overflow:hidden;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.06);
+}
+
+.table th{
+background:linear-gradient(135deg,#6366f1,#4f46e5);
+color:white;
+padding:14px;
+text-align:left;
+font-size:14px;
+}
+
+.table td{
+padding:14px;
+border-bottom:1px solid #f1f5f9;
+}
+
+.table tr:hover{
+background:#f8fafc;
+}
+
+/* =========================
+STATUS BADGES
+========================= */
+
+.status{
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+color:white;
+}
+
+.status.pending{
+background:#ef4444;
+}
+
+.status.inprogress{
+background:#3b82f6;
+}
+
+.status.completed{
+background:#10b981;
+}
+
+/* =========================
+PRIORITY BADGES
+========================= */
+
+.priority{
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+color:white;
+}
+
+.priority.high{
+background:#ef4444;
+}
+
+.priority.medium{
+background:#f59e0b;
+}
+
+.priority.low{
+background:#10b981;
+}
+
+/* =========================
+EVENT CARD
+========================= */
+
+.event-card{
+background:white;
+padding:25px;
+border-radius:14px;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.08);
+
+transition:0.35s;
+}
+
+.event-card:hover{
+transform:translateY(-8px);
+box-shadow:
+0 18px 40px rgba(0,0,0,0.15);
+}
+
+/* =========================
+HERO SECTION
+========================= */
+
+.hero{
+height:420px;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+color:white;
+
+background:linear-gradient(135deg,#6366f1,#8b5cf6);
+}
+
+/* =========================
+FOOTER
+========================= */
+
+.footer{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
+}

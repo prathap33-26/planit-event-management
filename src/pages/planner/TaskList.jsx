@@ -1,82 +1,116 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../../styles/Task.css";
+import "../../styles/planner.css";
 
-function TaskList() {
+function TaskList(){
 
-  const [tasks, setTasks] = useState([]);
+const tasks = [
+{
+id:1,
+title:"Decoration Setup",
+event:"Wedding Event",
+staff:"Prathap",
+priority:"High",
+status:"Pending",
+dueDate:"20 March 2026"
+},
+{
+id:2,
+title:"Food Arrangement",
+event:"Birthday Party",
+staff:"Lalitha",
+priority:"Medium",
+status:"In Progress",
+dueDate:"22 March 2026"
+},
+{
+id:3,
+title:"Sound System Setup",
+event:"Corporate Meeting",
+staff:"Tharun",
+priority:"Low",
+status:"Completed",
+dueDate:"18 March 2026"
+}
+]
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+return(
 
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api/tasks");
-      setTasks(response.data);
-    } catch (error) {
+<div className="planner-container">
 
-      setTasks([
-        { id: 1, title: "Stage Setup", description: "Arrange stage", eventId: 101, status: "Pending" },
-        { id: 2, title: "Decoration", description: "Decorate venue", eventId: 101, status: "In Progress" },
-        { id: 3, title: "Guest Welcome", description: "Welcome guests", eventId: 102, status: "Completed" }
-      ]);
+<h2>View All Tasks</h2>
 
-    }
-  };
+<div className="card">
 
-  const deleteTask = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/tasks/${id}`);
-      fetchTasks();
-    } catch {
-      setTasks(tasks.filter(task => task.id !== id));
-    }
-  };
+<table className="task-table">
 
-  return (
-    <div className="dashboard">
+<thead>
 
-      <h2 className="dashboard-title">Task List</h2>
+<tr>
+<th>ID</th>
+<th>Task</th>
+<th>Event</th>
+<th>Assigned Staff</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Due Date</th>
+<th>Actions</th>
+</tr>
 
-      <div className="task-container">
+</thead>
 
-        {tasks.map((task) => (
-          <div className="task-card" key={task.id}>
+<tbody>
 
-            <h3>{task.title}</h3>
+{tasks.map(task => (
 
-            <p>{task.description}</p>
+<tr key={task.id}>
 
-            <p><strong>Event ID:</strong> {task.eventId}</p>
+<td>{task.id}</td>
 
-            <p className={
-              task.status === "Pending"
-              ? "pending"
-              : task.status === "In Progress"
-              ? "progress"
-              : "completed"
-            }>
-              {task.status}
-            </p>
+<td>{task.title}</td>
 
-            <div className="task-buttons">
-              <button className="edit-btn">Edit</button>
-              <button
-                className="delete-btn"
-                onClick={() => deleteTask(task.id)}
-              >
-                Delete
-              </button>
-            </div>
+<td>{task.event}</td>
 
-          </div>
-        ))}
+<td>{task.staff}</td>
 
-      </div>
+<td>
+<span className={`priority ${task.priority.toLowerCase()}`}>
+{task.priority}
+</span>
+</td>
 
-    </div>
-  );
+<td>
+<span className={`status ${task.status.replace(" ","").toLowerCase()}`}>
+{task.status}
+</span>
+</td>
+
+<td>{task.dueDate}</td>
+
+<td>
+
+<button className="edit-btn">
+Edit
+</button>
+
+<button className="delete-btn">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+))}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+)
+
 }
 
 export default TaskList;

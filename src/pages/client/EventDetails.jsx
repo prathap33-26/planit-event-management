@@ -1,42 +1,118 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import FeedbackForm from "../../components/forms/FeedbackForm";
+import { useState } from "react";
+import "../../styles/client.css";
 
-const EventDetails = () => {
+function EventDetails(){
 
-  const { id } = useParams();
+const { id } = useParams()
 
-  const event = {
-    id: id,
-    title: "Wedding Ceremony",
-    date: "12 June 2026",
-    location: "Hyderabad",
-    description: "A beautiful wedding event organized by our team.",
-    status: "Completed"
-  };
+const event = {
+id:id,
+title:"Wedding Event",
+date:"20 March 2026",
+location:"Hyderabad",
+status:"In Progress",
+description:"A grand wedding celebration with decoration, catering and music arrangements."
+}
 
-  return (
-    <div style={{ padding: "40px" }}>
-      <h2>Event Details</h2>
+const tasks = [
+{task:"Decoration Setup",status:"Completed"},
+{task:"Food Catering",status:"In Progress"},
+{task:"Sound System",status:"Pending"}
+]
 
-      <h3>{event.title}</h3>
+const [feedback,setFeedback] = useState("")
 
-      <p>Date: {event.date}</p>
+const submitFeedback=()=>{
+alert("Feedback Submitted Successfully")
+setFeedback("")
+}
 
-      <p>Location: {event.location}</p>
+return(
 
-      <p>Description: {event.description}</p>
+<div className="event-details-container">
 
-      <p>Status: {event.status}</p>
+{/* Event Info */}
 
-      <hr />
+<div className="event-info-card">
 
-      <h3>Give Your Feedback</h3>
+<h2>{event.title}</h2>
 
-      <FeedbackForm eventId={event.id} />
+<p><b>Date:</b> {event.date}</p>
 
-    </div>
-  );
-};
+<p><b>Location:</b> {event.location}</p>
+
+<p><b>Status:</b> 
+<span className={`status ${event.status.replace(" ","").toLowerCase()}`}>
+{event.status}
+</span>
+</p>
+
+<p>{event.description}</p>
+
+</div>
+
+{/* Event Tasks */}
+
+<div className="card">
+
+<h3>Event Tasks Progress</h3>
+
+<table className="task-table">
+
+<thead>
+
+<tr>
+<th>Task</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{tasks.map((task,index)=>(
+<tr key={index}>
+
+<td>{task.task}</td>
+
+<td>
+<span className={`status ${task.status.replace(" ","").toLowerCase()}`}>
+{task.status}
+</span>
+</td>
+
+</tr>
+))}
+
+</tbody>
+
+</table>
+
+</div>
+
+{/* Feedback Section */}
+
+<div className="card">
+
+<h3>Submit Feedback</h3>
+
+<textarea
+placeholder="Write your feedback about the event..."
+value={feedback}
+onChange={(e)=>setFeedback(e.target.value)}
+/>
+
+<button className="btn" onClick={submitFeedback}>
+Submit Feedback
+</button>
+
+</div>
+
+</div>
+
+)
+
+}
 
 export default EventDetails;
