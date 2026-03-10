@@ -5,17 +5,24 @@ import EventDetails from "./pages/client/EventDetails";
 function App() {
   return (
     <>
-    <h1>This is testing </h1>
-    <EventDetails/>
-    <BrowserRouter>
-      <Routes>
+      <h1>This is testing</h1>
 
-        <Route path="/client/events" element={<EventList />} />
+      <EventDetails />
 
-        <Route path="/client/event/:id" element={<EventDetails />} />
+      <BrowserRouter>
+        <Routes>
 
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/client/events"
+            element={<EventList />}
+          />
+          <Route
+            path="/client/event/:id"
+            element={<EventDetails />}
+          />
+
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
