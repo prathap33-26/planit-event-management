@@ -1,48 +1,41 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { getUserRole, logout } from '../utils/auth';
-import './Navbar.css';
+import { Link } from "react-router-dom";
+import "../styles/Navbar.css";
 
+function Navbar(){
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const userRole = getUserRole();
+return(
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+<nav className="navbar">
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <Link to="/" className="navbar-brand-link">FSD App</Link>
-      </div>
-      
-      <ul className="navbar-links">
-        {/* Show role-based dashboard links */}
-        {userRole === 'Planner' && (
-          <li><Link to="/planner-dashboard" className="navbar-link">Planner Dashboard</Link></li>
-        )}
-        
-        {userRole === 'Staff' && (
-          <li><Link to="/staff-dashboard" className="navbar-link">Staff Dashboard</Link></li>
-        )}
-        
-        {userRole === 'Client' && (
-          <li><Link to="/client-dashboard" className="navbar-link">Client Dashboard</Link></li>
-        )}
-      </ul>
+<div className="nav-logo">
 
-      <div className="navbar-user-section">
-        {userRole && (
-          <span className="navbar-user-role">Role: {userRole}</span>
-        )}
-        <button onClick={handleLogout} className="navbar-logout-button">
-          Logout
-        </button>
-      </div>
-    </nav>
-  );
-};
+<img
+src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+alt="PlanIt Logo"
+/>
+
+<h2>PlanIt</h2>
+
+</div>
+
+<ul className="nav-links">
+
+<li><Link to="/">Home</Link></li>
+
+<li><Link to="/planner">Planner</Link></li>
+
+<li><Link to="/staff">Staff</Link></li>
+
+<li><Link to="/login">Login</Link></li>
+
+<li><Link to="/register" className="register-btn">Register</Link></li>
+
+</ul>
+
+</nav>
+
+)
+
+}
 
 export default Navbar;

@@ -1,101 +1,236 @@
-body{
-margin:0;
-font-family:Poppins, sans-serif;
-background:#0b0f1a;
+/* =========================
+AUTH PAGE BACKGROUND
+========================= */
+
+.auth-container{
+
+min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
-color:white;
-}
 
-.auth-container{
-width:100%;
-display:flex;
-justify-content:center;
-}
+background:
+linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)),
+url("https://images.unsplash.com/photo-1492724441997-5dc865305da7");
 
-.auth-card{
-background:#11152a;
+background-size:cover;
+background-position:center;
+
 padding:40px;
-border-radius:16px;
-width:420px;
-box-shadow:0 10px 40px rgba(0,0,0,0.6);
+
 }
 
-.subtitle{
-color:#9aa4c7;
-margin-bottom:20px;
+/* =========================
+MAIN LOGIN BOX
+========================= */
+
+.login-box{
+
+display:flex;
+
+width:950px;
+max-width:100%;
+
+background:white;
+
+border-radius:14px;
+
+overflow:hidden;
+
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+
 }
 
-label{
-display:block;
-margin-top:15px;
-font-size:12px;
-color:#8f98b3;
+/* =========================
+LEFT SIDE (FORM)
+========================= */
+
+.login-left{
+
+flex:1;
+
+padding:45px;
+
+background:white;
+
 }
 
-input{
-width:100%;
-padding:12px;
-margin-top:6px;
-border:none;
-border-radius:8px;
-background:#1a1f38;
-color:white;
-}
+.login-left h2{
 
-.primary-btn{
-width:100%;
-padding:14px;
-margin-top:25px;
-border:none;
-border-radius:10px;
-background:linear-gradient(90deg,#b06cff,#7c5cff);
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-.error{
-background:#2b1d25;
-border:1px solid #a04b5f;
-color:#ff8fa3;
-padding:10px;
-border-radius:8px;
-margin-bottom:15px;
-}
-
-.switch{
-text-align:center;
-margin-top:20px;
-color:#9aa4c7;
-}
-
-.demo{
-margin-top:20px;
-background:#151a33;
-padding:20px;
-border-radius:10px;
-}
-
-.demo-title{
-font-size:12px;
 margin-bottom:10px;
-color:#7d86a8;
+color:#4f46e5;
+
 }
 
-.demo-btn{
+.login-desc{
+
+font-size:14px;
+margin-bottom:25px;
+color:#6b7280;
+
+}
+
+.login-left label{
+
+display:block;
+margin-top:10px;
+font-weight:600;
+
+}
+
+.login-left input,
+.login-left select{
+
 width:100%;
+
 padding:10px;
-margin-top:8px;
-border:none;
-border-radius:8px;
-background:#1f2546;
-color:white;
-cursor:pointer;
+
+margin-top:6px;
+
+border-radius:6px;
+border:1px solid #d1d5db;
+
+margin-bottom:12px;
+
 }
 
-.demo-btn:hover{
-background:#2a3170;
+.login-left input:focus,
+.login-left select:focus{
+
+outline:none;
+border-color:#6366f1;
+
+}
+
+/* LOGIN BUTTON */
+
+.login-btn{
+
+width:100%;
+
+padding:12px;
+
+background:linear-gradient(135deg,#6366f1,#4f46e5);
+
+border:none;
+
+border-radius:6px;
+
+color:white;
+
+font-size:16px;
+
+margin-top:10px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.login-btn:hover{
+
+background:#4338ca;
+
+}
+
+/* FOOTER */
+
+.login-footer{
+
+margin-top:15px;
+
+font-size:14px;
+
+text-align:center;
+
+}
+
+.login-footer a{
+
+color:#4f46e5;
+
+text-decoration:none;
+
+}
+
+/* =========================
+RIGHT SIDE (INFO SECTION)
+========================= */
+
+.login-right{
+
+flex:1;
+
+padding:45px;
+
+color:black;
+
+background:linear-gradient(135deg,#6366f1,#4f46e5);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+
+}
+
+.login-right h2{
+
+margin-bottom:10px;
+
+}
+
+.feature-desc{
+
+margin-bottom:25px;
+
+opacity:0.9;
+
+}
+
+/* FEATURE CARDS */
+
+.feature-card{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+background:rgba(255,255,255,0.15);
+
+padding:15px;
+
+border-radius:10px;
+
+margin-bottom:15px;
+
+}
+
+.feature-icon{
+
+font-size:22px;
+
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+.login-box{
+
+flex-direction:column;
+
+}
+
+.login-right{
+
+text-align:center;
+
+}
+
 }

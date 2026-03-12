@@ -1,0 +1,234 @@
+/* ===============================
+PLANIT DESIGN SYSTEM
+=============================== */
+
+:root{
+
+--primary:#6366f1;
+--primary-dark:#4f46e5;
+
+--accent:#8b5cf6;
+
+--success:#10b981;
+--warning:#f59e0b;
+--danger:#ef4444;
+
+--bg:#f8fafc;
+--card:#ffffff;
+
+--text:#1e293b;
+--muted:#64748b;
+
+--radius:14px;
+
+--shadow-sm:0 4px 10px rgba(0,0,0,0.05);
+--shadow-md:0 10px 25px rgba(0,0,0,0.08);
+--shadow-lg:0 20px 45px rgba(0,0,0,0.12);
+
+}
+
+/* ===============================
+GLOBAL RESET
+=============================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter','Poppins',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(rgba(99,102,241,0.15), rgba(139,92,246,0.15)),
+url("https://images.unsplash.com/photo-1557804506-669a67965ba0");
+
+background-size:cover;
+background-attachment:fixed;
+background-position:center;
+
+color:var(--text);
+
+min-height:100vh;
+
+}
+
+/* ===============================
+CONTAINER
+=============================== */
+
+.container{
+
+max-width:1200px;
+margin:auto;
+padding:40px;
+
+}
+
+/* ===============================
+CARDS
+=============================== */
+
+.card{
+
+background:var(--card);
+border-radius:var(--radius);
+padding:28px;
+
+box-shadow:var(--shadow-md);
+
+transition:0.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+box-shadow:var(--shadow-lg);
+
+}
+
+/* ===============================
+BUTTON
+=============================== */
+
+.btn{
+
+background:linear-gradient(135deg,var(--primary),var(--accent));
+color:white;
+
+border:none;
+padding:12px 22px;
+
+border-radius:8px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(99,102,241,0.4);
+
+}
+
+/* ===============================
+FORM
+=============================== */
+
+.input{
+
+width:100%;
+padding:12px;
+
+border-radius:8px;
+
+border:1px solid #e2e8f0;
+
+margin-top:6px;
+
+}
+
+.input:focus{
+
+outline:none;
+border-color:var(--primary);
+
+box-shadow:0 0 0 3px rgba(99,102,241,0.2);
+
+}
+
+/* ===============================
+TABLE
+=============================== */
+
+.table{
+
+width:100%;
+border-collapse:collapse;
+
+margin-top:20px;
+
+background:white;
+
+border-radius:var(--radius);
+
+overflow:hidden;
+
+box-shadow:var(--shadow-sm);
+
+}
+
+.table th{
+
+background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+color:white;
+
+padding:14px;
+text-align:left;
+
+}
+
+.table td{
+
+padding:14px;
+border-bottom:1px solid #f1f5f9;
+
+}
+
+.table tr:hover{
+
+background:#f8fafc;
+
+}
+
+/* ===============================
+STATUS BADGES
+=============================== */
+
+.badge{
+
+padding:6px 12px;
+border-radius:20px;
+
+font-size:12px;
+font-weight:600;
+color:white;
+
+}
+
+.badge.success{ background:var(--success); }
+.badge.warning{ background:var(--warning); }
+.badge.danger{ background:var(--danger); }
+
+/* ===============================
+GRID
+=============================== */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+
+}
+
+/* ===============================
+PAGE TITLES
+=============================== */
+
+.page-title{
+
+font-size:28px;
+font-weight:700;
+margin-bottom:25px;
+
+color:var(--primary-dark);
+
+}
