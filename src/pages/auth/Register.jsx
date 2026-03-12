@@ -1,93 +1,158 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/auth.css";
 
 function Register(){
 
-  const { role } = useParams();
-  const navigate = useNavigate();
+const [form,setForm] = useState({
+username:"",
+email:"",
+password:"",
+confirmPassword:"",
+role:"CLIENT"
+})
 
-  const [firstName,setFirstName] = useState("");
-  const [lastName,setLastName] = useState("");
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
+const handleChange=(e)=>{
+setForm({
+...form,
+[e.target.name]:e.target.value
+})
+}
 
-  const handleRegister = (e)=>{
-    e.preventDefault();
+const handleSubmit=(e)=>{
+e.preventDefault()
 
-    if(!firstName || !lastName || !email || !password){
-      alert("Please fill all fields");
-      return;
-    }
+if(form.password !== form.confirmPassword){
+alert("Passwords do not match")
+return
+}
 
-    alert(`Registered as ${role}`);
+console.log("Register Data:",form)
 
-    navigate("/");
-  };
+alert("Registration Successful")
+}
 
-  return(
+return(
 
-    <div className="auth-container">
+<div className="auth-container">
 
-      <div className="auth-card">
+<div className="login-box">
 
-        <h1>Register as {role}</h1>
+{/* LEFT SIDE REGISTER FORM */}
 
-        <form onSubmit={handleRegister}>
+<div className="login-left">
 
-          <label>First Name</label>
-          <input
-          type="text"
-          placeholder="Enter first name"
-          value={firstName}
-          onChange={(e)=>setFirstName(e.target.value)}
-          />
+<h2>Create Account</h2>
 
-          <label>Last Name</label>
-          <input
-          type="text"
-          placeholder="Enter last name"
-          value={lastName}
-          onChange={(e)=>setLastName(e.target.value)}
-          />
+<p className="login-desc">
+Register to start managing events with PlanIt
+</p>
 
-          <label>Email</label>
-          <input
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          />
+<form onSubmit={handleSubmit}>
 
-          <label>Password</label>
-          <input
-          type="password"
-          placeholder="••••••••"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-          />
+<label>Username</label>
+<input
+type="text"
+name="username"
+placeholder="Enter username"
+onChange={handleChange}
+/>
 
-          <button className="primary-btn">
-            Register
-          </button>
+<label>Email</label>
+<input
+type="email"
+name="email"
+placeholder="Enter email"
+onChange={handleChange}
+/>
 
-        </form>
+<label>Password</label>
+<input
+type="password"
+name="password"
+placeholder="Enter password"
+onChange={handleChange}
+/>
 
-        <p className="switch">
-          Already have an account?
-          <span
-          className="link"
-          onClick={()=>navigate("/")}
-          style={{cursor:"pointer", marginLeft:"5px"}}
-          >
-            Login
-          </span>
-        </p>
+<label>Confirm Password</label>
+<input
+type="password"
+name="confirmPassword"
+placeholder="Confirm password"
+onChange={handleChange}
+/>
 
-      </div>
+<label>Select Role</label>
+<select name="role" onChange={handleChange}>
+<option value="PLANNER">Planner</option>
+<option value="STAFF">Staff</option>
+<option value="CLIENT">Client</option>
+</select>
 
-    </div>
+<button className="login-btn">
+Register
+</button>
 
-  );
+</form>
+
+<p className="login-footer">
+Already have an account?
+<Link to="/login"> Login here</Link>
+</p>
+
+</div>
+
+{/* RIGHT SIDE FEATURES */}
+
+<div className="login-right">
+
+<h2>Join PlanIt</h2>
+
+<p className="feature-desc">
+Create your account and start organizing events efficiently
+</p>
+
+<div className="feature-card">
+
+<div className="feature-icon">📅</div>
+
+<div>
+<h4>Event Planning</h4>
+<p>Create and manage events easily</p>
+</div>
+
+</div>
+
+<div className="feature-card">
+
+<div className="feature-icon">👨‍💼</div>
+
+<div>
+<h4>Staff Management</h4>
+<p>Assign and monitor staff tasks</p>
+</div>
+
+</div>
+
+<div className="feature-card">
+
+<div className="feature-icon">💬</div>
+
+<div>
+<h4>Client Interaction</h4>
+<p>Collect feedback and improve services</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+)
+
 }
 
 export default Register;
