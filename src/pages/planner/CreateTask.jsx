@@ -11,30 +11,30 @@ staff:"",
 priority:"Medium",
 dueDate:"",
 status:"Pending"
-})
+});
 
 const handleChange=(e)=>{
 setTask({
 ...task,
 [e.target.name]:e.target.value
-})
-}
+});
+};
 
 const handleSubmit=(e)=>{
-e.preventDefault()
+e.preventDefault();
 
-console.log("Task Created:",task)
+console.log("Task Created:",task);
 
-alert("Task Created Successfully")
-}
+alert("Task Created Successfully");
+};
 
 return(
 
-<div className="planner-container">
+<div className="create-task-container">
 
-<h2>Create Task</h2>
+<div className="create-task-card">
 
-<div className="card">
+<h2 className="create-title">Create Task</h2>
 
 <form onSubmit={handleSubmit} className="task-form">
 
@@ -61,7 +61,7 @@ onChange={handleChange}
 />
 </div>
 
-{/* Event */}
+{/* Select Event */}
 
 <div className="form-group">
 <label>Select Event</label>
@@ -117,7 +117,7 @@ onChange={handleChange}
 </select>
 </div>
 
-<button className="btn">
+<button className="create-btn">
 Create Task
 </button>
 
@@ -127,7 +127,7 @@ Create Task
 
 </div>
 
-)
+);
 
 }
 

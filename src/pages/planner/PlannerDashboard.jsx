@@ -17,7 +17,7 @@ const tasks = [
 
 return(
 
-<div className="planner-container">
+<div className="planner-dashboard">
 
 <h2>📊 Planner Dashboard</h2>
 

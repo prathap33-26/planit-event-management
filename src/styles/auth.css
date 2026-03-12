@@ -1,138 +1,236 @@
-/* BACKGROUND */
+/* =========================
+AUTH PAGE BACKGROUND
+========================= */
 
 .auth-container{
+
 min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
 
 background:
-linear-gradient(rgba(30,41,59,0.8), rgba(30,41,59,0.9)),
-url("https://images.unsplash.com/photo-1498050108023-c5249f4df085");
+linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)),
+url("https://images.unsplash.com/photo-1492724441997-5dc865305da7");
 
 background-size:cover;
 background-position:center;
+
 padding:40px;
+
 }
 
-/* MAIN LOGIN BOX */
+/* =========================
+MAIN LOGIN BOX
+========================= */
 
 .login-box{
+
 display:flex;
-width:900px;
+
+width:950px;
+max-width:100%;
+
+background:white;
+
 border-radius:14px;
+
 overflow:hidden;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+
 }
 
-/* LEFT SIDE */
+/* =========================
+LEFT SIDE (FORM)
+========================= */
 
 .login-left{
+
 flex:1;
-padding:40px;
-background:rgba(255,255,255,0.95);
+
+padding:45px;
+
+background:white;
+
 }
 
 .login-left h2{
+
 margin-bottom:10px;
+color:#4f46e5;
+
 }
 
 .login-desc{
+
 font-size:14px;
 margin-bottom:25px;
-color:#555;
+color:#6b7280;
+
 }
 
 .login-left label{
+
 display:block;
 margin-top:10px;
 font-weight:600;
+
 }
 
 .login-left input,
 .login-left select{
+
 width:100%;
+
 padding:10px;
+
 margin-top:6px;
+
 border-radius:6px;
-border:1px solid #ccc;
-margin-bottom:10px;
+border:1px solid #d1d5db;
+
+margin-bottom:12px;
+
 }
 
+.login-left input:focus,
+.login-left select:focus{
+
+outline:none;
+border-color:#6366f1;
+
+}
+
+/* LOGIN BUTTON */
+
 .login-btn{
+
 width:100%;
+
 padding:12px;
+
 background:linear-gradient(135deg,#6366f1,#4f46e5);
+
 border:none;
+
 border-radius:6px;
+
 color:white;
+
 font-size:16px;
+
 margin-top:10px;
+
 cursor:pointer;
+
+transition:0.3s;
+
 }
 
 .login-btn:hover{
+
 background:#4338ca;
+
 }
 
+/* FOOTER */
+
 .login-footer{
+
 margin-top:15px;
+
 font-size:14px;
+
+text-align:center;
+
 }
 
 .login-footer a{
+
 color:#4f46e5;
+
 text-decoration:none;
+
 }
 
-/* RIGHT SIDE */
+/* =========================
+RIGHT SIDE (INFO SECTION)
+========================= */
 
 .login-right{
+
 flex:1;
-padding:40px;
-color:white;
+
+padding:45px;
+
+color:black;
+
 background:linear-gradient(135deg,#6366f1,#4f46e5);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+
 }
 
 .login-right h2{
+
 margin-bottom:10px;
+
 }
 
 .feature-desc{
+
 margin-bottom:25px;
+
 opacity:0.9;
+
 }
 
 /* FEATURE CARDS */
 
 .feature-card{
+
 display:flex;
+
 align-items:center;
+
 gap:15px;
-background:rgba(255,255,255,0.9);
+
+background:rgba(255,255,255,0.15);
+
 padding:15px;
+
 border-radius:10px;
+
 margin-bottom:15px;
-color:#111827;
+
 }
 
 .feature-icon{
+
 font-size:22px;
+
 }
 
-/* MOBILE */
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:900px){
 
 .login-box{
+
 flex-direction:column;
-width:100%;
+
 }
 
 .login-right{
+
 text-align:center;
+
 }
 
 }

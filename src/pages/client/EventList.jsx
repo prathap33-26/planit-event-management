@@ -145,7 +145,45 @@ event creation, task assignment, staff coordination and client feedback.
 
 <footer className="footer">
 
-<p>© 2026 PlanIt Event Management System</p>
+<div className="footer-container">
+
+<div className="footer-section">
+<h3>PlanIt</h3>
+<p>
+PlanIt is an event management platform that helps planners,
+staff and clients collaborate to execute events successfully.
+</p>
+</div>
+
+<div className="footer-section">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/planner">Planner</a></li>
+<li><a href="/staff">Staff</a></li>
+<li><a href="/login">Login</a></li>
+</ul>
+</div>
+
+<div className="footer-section">
+<h3>Contact</h3>
+<p>Email: support@planit.com</p>
+<p>Phone: +91 98765 43210</p>
+<p>Location: Hyderabad, India</p>
+</div>
+
+<div className="footer-section">
+<h3>Follow Us</h3>
+<p>Instagram</p>
+<p>LinkedIn</p>
+<p>Twitter</p>
+</div>
+
+</div>
+
+<div className="footer-bottom">
+<p>© 2026 PlanIt Event Management System | All Rights Reserved</p>
+</div>
 
 </footer>
 

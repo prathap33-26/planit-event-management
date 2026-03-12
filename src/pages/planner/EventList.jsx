@@ -1,103 +1,103 @@
 import "../../styles/planner.css";
-import { Link } from "react-router-dom";
 
-function TaskList(){
+function EventList(){
 
-const tasks = [
+const events = [
 {
 id:1,
-title:"Decoration Setup",
-event:"Wedding Event",
-staff:"Prathap",
-priority:"High",
-status:"Pending",
-dueDate:"20 March"
+title:"Wedding Event",
+date:"20 March 2026",
+location:"Hyderabad",
+status:"Planned"
 },
 {
 id:2,
-title:"Food Arrangement",
-event:"Birthday Party",
-staff:"Lalitha",
-priority:"Medium",
-status:"In Progress",
-dueDate:"22 March"
+title:"Birthday Party",
+date:"25 March 2026",
+location:"Bangalore",
+status:"Completed"
 },
 {
 id:3,
-title:"Sound System Setup",
-event:"Corporate Meeting",
-staff:"Tharun",
-priority:"Low",
-status:"Completed",
-dueDate:"18 March"
+title:"Corporate Meeting",
+date:"30 March 2026",
+location:"Chennai",
+status:"In Progress"
 }
-]
+];
 
 return(
 
 <div className="planner-container">
 
-<h2>Task Management</h2>
+<h2 className="page-title">📅 Event Management</h2>
+
+{/* Event Statistics */}
+
+<div className="event-stats">
+
+<div className="stat-box">
+<h4>Total Events</h4>
+<p>{events.length}</p>
+</div>
+
+<div className="stat-box">
+<h4>Planned</h4>
+<p>{events.filter(e => e.status==="Planned").length}</p>
+</div>
+
+<div className="stat-box">
+<h4>In Progress</h4>
+<p>{events.filter(e => e.status==="In Progress").length}</p>
+</div>
+
+<div className="stat-box">
+<h4>Completed</h4>
+<p>{events.filter(e => e.status==="Completed").length}</p>
+</div>
+
+</div>
+
+{/* Events Table */}
 
 <div className="card">
 
-<table className="task-table">
+<table className="table">
 
 <thead>
 
 <tr>
 <th>ID</th>
-<th>Title</th>
-<th>Event</th>
-<th>Staff</th>
-<th>Priority</th>
+<th>Event Title</th>
+<th>Date</th>
+<th>Location</th>
 <th>Status</th>
-<th>Due Date</th>
-<th>Actions</th>
 </tr>
 
 </thead>
 
 <tbody>
 
-{tasks.map(task=>(
-<tr key={task.id}>
+{events.map(event => (
 
-<td>{task.id}</td>
+<tr key={event.id}>
 
-<td>{task.title}</td>
+<td>{event.id}</td>
 
-<td>{task.event}</td>
+<td>{event.title}</td>
 
-<td>{task.staff}</td>
+<td>{event.date}</td>
+
+<td>{event.location}</td>
 
 <td>
-<span className={`priority ${task.priority.toLowerCase()}`}>
-{task.priority}
+<span className={`status ${event.status.replace(" ","").toLowerCase()}`}>
+{event.status}
 </span>
-</td>
-
-<td>
-<span className={`status ${task.status.replace(" ","").toLowerCase()}`}>
-{task.status}
-</span>
-</td>
-
-<td>{task.dueDate}</td>
-
-<td>
-
-<button className="edit-btn">
-Edit
-</button>
-
-<button className="delete-btn">
-Delete
-</button>
-
 </td>
 
 </tr>
+
 ))}
 
 </tbody>
@@ -112,4 +112,4 @@ Delete
 
 }
 
-export default TaskList;
+export default EventList;

@@ -28,76 +28,50 @@ alert("Event Created Successfully!")
 
 return(
 
-<div className="planner-container">
+<div className="create-event-container">
 
-<h2>Create New Event</h2>
+  <div className="create-event-card">
 
-<div className="card">
+    <h2 className="create-title">Create New Event</h2>
 
-<form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
 
-<div className="form-group">
-<label>Event Title</label>
-<input 
-type="text"
-name="title"
-placeholder="Enter event title"
-onChange={handleChange}
-/>
-</div>
+      <div className="form-group">
+        <label>Event Title</label>
+        <input type="text" name="title" placeholder="Enter event title" onChange={handleChange}/>
+      </div>
 
-<div className="form-group">
-<label>Event Date</label>
-<input 
-type="date"
-name="date"
-onChange={handleChange}
-/>
-</div>
+      <div className="form-group">
+        <label>Event Date</label>
+        <input type="date" name="date" onChange={handleChange}/>
+      </div>
 
-<div className="form-group">
-<label>Location</label>
-<input 
-type="text"
-name="location"
-placeholder="Enter location"
-onChange={handleChange}
-/>
-</div>
+      <div className="form-group">
+        <label>Location</label>
+        <input type="text" name="location" placeholder="Enter location" onChange={handleChange}/>
+      </div>
 
-<div className="form-group">
-<label>Description</label>
-<textarea
-name="description"
-placeholder="Enter event description"
-onChange={handleChange}
-/>
-</div>
+      <div className="form-group">
+        <label>Description</label>
+        <textarea name="description" placeholder="Enter event description" onChange={handleChange}/>
+      </div>
 
-<div className="form-group">
-<label>Status</label>
-<select
-name="status"
-onChange={handleChange}
->
+      <div className="form-group">
+        <label>Status</label>
+        <select name="status" onChange={handleChange}>
+          <option>Planned</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+      </div>
 
-<option>Planned</option>
-<option>In Progress</option>
-<option>Completed</option>
+      <button className="create-btn">Create Event</button>
 
-</select>
-</div>
+    </form>
 
-<button className="btn">
-Create Event
-</button>
-
-</form>
+  </div>
 
 </div>
-
-</div>
-
 )
 
 }

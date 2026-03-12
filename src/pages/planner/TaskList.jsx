@@ -30,13 +30,39 @@ priority:"Low",
 status:"Completed",
 dueDate:"18 March 2026"
 }
-]
+];
 
 return(
 
 <div className="planner-container">
 
-<h2>View All Tasks</h2>
+<h2 className="page-title">📋 Task Management</h2>
+
+{/* Task Stats */}
+
+<div className="task-stats">
+
+<div className="stat-box">
+<h4>Total Tasks</h4>
+<p>{tasks.length}</p>
+</div>
+
+<div className="stat-box">
+<h4>Completed</h4>
+<p>{tasks.filter(t=>t.status==="Completed").length}</p>
+</div>
+
+<div className="stat-box">
+<h4>Pending</h4>
+<p>{tasks.filter(t=>t.status==="Pending").length}</p>
+</div>
+
+<div className="stat-box">
+<h4>In Progress</h4>
+<p>{tasks.filter(t=>t.status==="In Progress").length}</p>
+</div>
+
+</div>
 
 <div className="card">
 
@@ -48,7 +74,7 @@ return(
 <th>ID</th>
 <th>Task</th>
 <th>Event</th>
-<th>Assigned Staff</th>
+<th>Staff</th>
 <th>Priority</th>
 <th>Status</th>
 <th>Due Date</th>

@@ -53,14 +53,18 @@ return(
 
 <div className="staff-container">
 
-<h2>Staff Task Dashboard</h2>
+{/* Header */}
 
-{/* Staff Info */}
+<div className="staff-header">
+
+<h2>📋 Staff Task Dashboard</h2>
 
 <div className="staff-info">
 <h3>Welcome Staff</h3>
 <p>Staff ID : S102</p>
 <p>Role : Event Staff</p>
+</div>
+
 </div>
 
 {/* Task Summary */}
@@ -99,12 +103,13 @@ value={search}
 onChange={(e)=>setSearch(e.target.value)}
 />
 
+{/* Task Table */}
+
 <div className="card">
 
 <table className="staff-task-table">
 
 <thead>
-
 <tr>
 <th>ID</th>
 <th>Task</th>
@@ -114,7 +119,6 @@ onChange={(e)=>setSearch(e.target.value)}
 <th>Status</th>
 <th>Update Status</th>
 </tr>
-
 </thead>
 
 <tbody>
@@ -147,7 +151,7 @@ onChange={(e)=>setSearch(e.target.value)}
 
 <select
 onChange={(e)=>updateStatus(task.id,e.target.value)}
-defaultValue={task.status}
+value={task.status}
 >
 
 <option>Pending</option>
@@ -168,7 +172,7 @@ defaultValue={task.status}
 
 </div>
 
-{/* Logout Button */}
+{/* Logout */}
 
 <div className="logout-section">
 <button className="logout-btn">Logout</button>
