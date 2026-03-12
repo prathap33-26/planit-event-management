@@ -1,0 +1,165 @@
+/* HERO SECTION */
+
+.hero{
+height:520px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30");
+
+background-size:cover;
+background-position:center;
+}
+
+.hero h1{
+font-size:55px;
+margin-bottom:15px;
+}
+
+.hero p{
+max-width:600px;
+font-size:18px;
+margin-bottom:25px;
+}
+
+.explore-btn{
+background:#6366f1;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* FEATURES */
+
+.features{
+padding:80px 60px;
+text-align:center;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.feature-card{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-6px);
+}
+
+/* EVENTS */
+
+.events{
+padding:80px 60px;
+background:#f9fafc;
+}
+
+.event-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+margin-top:30px;
+}
+
+.event-card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.event-card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.event-content{
+padding:20px;
+}
+
+.view-btn{
+background:#6366f1;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* ABOUT */
+
+.about{
+padding:80px;
+text-align:center;
+max-width:800px;
+margin:auto;
+}
+
+/* FOOTER */
+
+.footer{
+background:#0f172a;
+color:white;
+padding:50px 60px 20px;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:40px;
+margin-bottom:30px;
+}
+
+.footer-section h3{
+margin-bottom:15px;
+font-size:18px;
+}
+
+.footer-section p{
+font-size:14px;
+line-height:1.6;
+color:#cbd5e1;
+}
+
+.footer-section ul{
+list-style:none;
+padding:0;
+}
+
+.footer-section ul li{
+margin-bottom:8px;
+}
+
+.footer-section ul li a{
+color:#cbd5e1;
+text-decoration:none;
+}
+
+.footer-section ul li a:hover{
+color:#6366f1;
+}
+
+.footer-bottom{
+text-align:center;
+border-top:1px solid #334155;
+padding-top:15px;
+font-size:13px;
+color:#94a3b8;
+}
