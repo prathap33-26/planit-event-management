@@ -1,97 +1,143 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../styles/auth.css";
 
-function Login() {
+function Login(){
 
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [error,setError] = useState("");
+const [form,setForm] = useState({
+email:"",
+password:"",
+role:"PLANNER"
+});
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+const handleChange=(e)=>{
+setForm({
+...form,
+[e.target.name]:e.target.value
+});
+};
 
-    if(!email || !password){
-      setError("Please fill in all fields.");
-      return;
-    }
+const handleSubmit=(e)=>{
+e.preventDefault();
 
-    setError("");
-    alert("Login Success");
-  };
+if(form.role === "PLANNER"){
+navigate("/planner");
+}
+else if(form.role === "STAFF"){
+navigate("/staff");
+}
+else{
+navigate("/");
+}
+};
 
-  return (
+return(
 
-    <div className="auth-container">
+<div className="auth-container">
 
-      <div className="auth-card">
+<div className="login-box">
 
-        <h1>Welcome back 👋</h1>
-        <p className="subtitle">
-          Sign in to EventOS — Planner, Staff, or Client
-        </p>
+{/* LEFT SIDE LOGIN */}
 
-        {error && <div className="error">{error}</div>}
+<div className="login-left">
 
-        <form onSubmit={handleLogin}>
+<h2>Login to PlanIt</h2>
 
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-          />
+<p className="login-desc">
+Welcome back! Log in to manage events, staff tasks and client bookings.
+</p>
 
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-          />
+<form onSubmit={handleSubmit}>
 
-          <button className="primary-btn">Sign In</button>
+<label>Email</label>
+<input
+type="email"
+name="email"
+placeholder="Enter your email"
+onChange={handleChange}
+/>
 
-        </form>
+<label>Password</label>
+<input
+type="password"
+name="password"
+placeholder="Enter your password"
+onChange={handleChange}
+/>
 
-        <p className="switch">
-          No account? Choose role below
-        </p>
+<label>Login As</label>
+<select name="role" onChange={handleChange}>
+<option value="PLANNER">Planner</option>
+<option value="STAFF">Staff</option>
+<option value="CLIENT">Client</option>
+</select>
 
-        <div className="demo">
+<button className="login-btn">
+Login
+</button>
 
-          <p className="demo-title">REGISTER</p>
+</form>
 
-          <button
-          className="demo-btn"
-          onClick={()=>navigate("/register/planner")}
-          >
-            📁 Register as Planner
-          </button>
+<p className="login-footer">
+Don't have an account?
+<a href="/register"> Create one</a>
+</p>
 
-          <button
-          className="demo-btn"
-          onClick={()=>navigate("/register/staff")}
-          >
-            ⚙️ Register as Staff
-          </button>
+</div>
 
-          <button
-          className="demo-btn"
-          onClick={()=>navigate("/register/client")}
-          >
-            👤 Register as Client
-          </button>
+{/* RIGHT SIDE FEATURES */}
 
-        </div>
+<div className="login-right">
 
-      </div>
+<h2>Welcome to PlanIt</h2>
 
-    </div>
+<p className="feature-desc">
+Streamline your event management process with ease
+</p>
 
-  );
+<div className="feature-card">
+
+<div className="feature-icon">📅</div>
+
+<div>
+<h4>Event Management</h4>
+<p>Plan and organize events seamlessly</p>
+</div>
+
+</div>
+
+<div className="feature-card">
+
+<div className="feature-icon">✅</div>
+
+<div>
+<h4>Staff Task Tracking</h4>
+<p>Assign and monitor tasks efficiently</p>
+</div>
+
+</div>
+
+<div className="feature-card">
+
+<div className="feature-icon">💬</div>
+
+<div>
+<h4>Client Feedback System</h4>
+<p>Gather client feedback and improve services</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+);
+
 }
 
 export default Login;
