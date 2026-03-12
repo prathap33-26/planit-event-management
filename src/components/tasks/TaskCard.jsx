@@ -1,37 +1,17 @@
-import React from "react";
-import "../../styles/staff.css";
+function TaskCard({description,status}){
 
-const TaskCard = ({ task, updateStatus }) => {
+return(
 
-  const handleChange = (e) => {
-    updateStatus(task.id, e.target.value);
-  };
+<div className="event-card">
 
-  const getStatusClass = () => {
-    if (task.status === "Pending") return "pending";
-    if (task.status === "In Progress") return "progress";
-    if (task.status === "Completed") return "completed";
-  };
+<h3>{description}</h3>
 
-  return (
-    <div className="task-card">
+<p>Status : {status}</p>
 
-      <h2>{task.title}</h2>
+</div>
 
-      <p>{task.description}</p>
+)
 
-      <p className={`status ${getStatusClass()}`}>
-        Status: {task.status}
-      </p>
-
-      <select value={task.status} onChange={handleChange}>
-        <option value="Pending">Pending</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-      </select>
-
-    </div>
-  );
-};
+}
 
 export default TaskCard;
