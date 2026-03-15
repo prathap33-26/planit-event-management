@@ -8,15 +8,18 @@ function EventDetails(){
 
 const { id } = useParams();
 
-const [event,setEvent] = useState({});
-const [feedback,setFeedback] = useState("");
+const [event, setEvent] = useState(null);
+const [feedback, setFeedback] = useState("");
 
 /* Fetch Event Details */
 
 useEffect(()=>{
 
 fetch(BASE_URL + "/getevents")
-.then(res => res.json())
+.then(res => {
+  if (!res.ok) throw new Error("Failed to fetch");
+  return res.json();
+})
 .then(data => {
 
 const selectedEvent = data.find(e => e.id == id);
@@ -36,11 +39,12 @@ alert("Please enter feedback");
 return;
 }
 
-fetch(BASE_URL + "/event/" + id + "?feedback=" + feedback,{
+fetch(`${BASE_URL}/event/${id}?feedback=${encodeURIComponent(feedback)}`,{
 method:"PUT"
 })
-.then(res=>res.json())
-.then(()=>{
+.then(res => res.json())
+.then((updatedEvent) => {
+setEvent(updatedEvent);
 alert("Feedback Submitted Successfully");
 setFeedback("");
 })
