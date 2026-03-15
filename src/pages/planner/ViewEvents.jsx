@@ -22,7 +22,7 @@ setEvents(data);
 return(
 
 <div className="planner-container">
-
+ 
 <h2 className="page-title">📅 Event Management</h2>
 
 {/* Event Statistics */}
