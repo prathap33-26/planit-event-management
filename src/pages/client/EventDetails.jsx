@@ -34,21 +34,36 @@ setEvent(selectedEvent);
 
 const submitFeedback = () => {
 
-if(!feedback){
-alert("Please enter feedback");
-return;
-}
+  if(!feedback){
+    alert("Please enter feedback");
+    return;
+  }
 
-fetch(`${BASE_URL}/event/${id}?feedback=${encodeURIComponent(feedback)}`,{
-method:"PUT"
-})
-.then(res => res.json())
-.then((updatedEvent) => {
-setEvent(updatedEvent);
-alert("Feedback Submitted Successfully");
-setFeedback("");
-})
-.catch(err=>console.log(err));
+  const url = `${BASE_URL}/event/${id}?feedback=${encodeURIComponent(feedback)}`;
+  
+  console.log("Calling URL:", url);   // check this in browser console
+
+  fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => {
+    console.log("Response status:", res.status);   // check this too
+    if(!res.ok) throw new Error("Server error: " + res.status);
+    return res.json();
+  })
+  .then((updatedEvent) => {
+    console.log("Updated event:", updatedEvent);
+    setEvent(updatedEvent);
+    alert("Feedback Submitted Successfully");
+    setFeedback("");
+  })
+  .catch(err => {
+    console.log("Error:", err);
+    alert("Failed: " + err.message);
+  });
 
 };
 
