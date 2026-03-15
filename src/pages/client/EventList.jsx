@@ -1,34 +1,24 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../../styles/client.css";
+
+const BASE_URL = "http://localhost:8080/client";
 
 function EventList(){
 
-const events = [
-{
-id:1,
-title:"Wedding Event",
-date:"20 March 2026",
-location:"Hyderabad",
-description:"A beautiful wedding celebration with full decoration and catering.",
-img:"https://images.unsplash.com/photo-1519741497674-611481863552"
-},
-{
-id:2,
-title:"Birthday Party",
-date:"25 March 2026",
-location:"Bangalore",
-description:"Fun birthday party with music, food and entertainment.",
-img:"https://images.unsplash.com/photo-1464349153735-7db50ed83c84"
-},
-{
-id:3,
-title:"Corporate Meeting",
-date:"30 March 2026",
-location:"Chennai",
-description:"Professional corporate event with conference arrangements.",
-img:"https://images.unsplash.com/photo-1551836022-d5d88e9218df"
-}
-]
+const [events,setEvents] = useState([]);
+
+useEffect(()=>{
+
+fetch(BASE_URL + "/getevents")
+.then(res => res.json())
+.then(data => {
+console.log("Events from backend:",data);
+setEvents(data);
+})
+.catch(err => console.log(err));
+
+},[]);
 
 return(
 
@@ -97,7 +87,10 @@ Explore Events
 
 <div className="event-card" key={event.id}>
 
-<img src={event.img} alt={event.title}/>
+<img 
+src="https://images.unsplash.com/photo-1519741497674-611481863552"
+alt={event.title}
+/>
 
 <div className="event-content">
 

@@ -1,41 +1,84 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../styles/Navbar.css";
 
-function Navbar(){
+function Navbar() {
+  const navigate = useNavigate();
+  const [role, setRole] = useState("");
 
-return(
+  useEffect(() => {
+    const syncRole = () => {
+      const userRole = localStorage.getItem("role");
+      setRole(userRole || "");
+    };
 
-<nav className="navbar">
+    syncRole(); // Run on mount
 
-<div className="nav-logo">
+    window.addEventListener("roleChanged", syncRole); // Listen for login/logout
+    window.addEventListener("storage", syncRole);     // Listen for cross-tab changes
 
-<img
-src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
-alt="PlanIt Logo"
-/>
+    return () => {
+      window.removeEventListener("roleChanged", syncRole);
+      window.removeEventListener("storage", syncRole);
+    };
+  }, []);
 
-<h2>PlanIt</h2>
+  function logout() {
+    localStorage.removeItem("role");
+    setRole("");
+    window.dispatchEvent(new Event("roleChanged")); // Notify navbar
+    navigate("/");
+  }
 
-</div>
+  return (
+    <nav className="navbar">
+      <h2 className="logo">PlanIt</h2>
 
-<ul className="nav-links">
+      <div className="nav-links">
 
-<li><Link to="/">Home</Link></li>
+        {/* BEFORE LOGIN */}
+        {!role && (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
 
-<li><Link to="/planner">Planner</Link></li>
+        {/* CLIENT NAVBAR */}
+        {role === "client" && (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/events">Events</Link>
+            <Link to="/events">View Events</Link>
+            <button onClick={logout}>Logout</button>
+          </>
+        )}
 
-<li><Link to="/staff">Staff</Link></li>
+        {/* PLANNER NAVBAR */}
+        {role === "planner" && (
+          <>
+            <Link to="/planner">Dashboard</Link>
+            <Link to="/planner/create-event">Create Event</Link>
+            <Link to="/planner/events">View Events</Link>
+            <Link to="/planner/create-task">Create Task</Link>
+            <Link to="/planner/tasks">View Tasks</Link>
+            <button onClick={logout}>Logout</button>
+          </>
+        )}
 
-<li><Link to="/login">Login</Link></li>
+        {/* STAFF NAVBAR */}
+        {role === "staff" && (
+          <>
+            <Link to="/staff">Dashboard</Link>
+            <Link to="/staff/tasks">My Tasks</Link>
+            <button onClick={logout}>Logout</button>
+          </>
+        )}
 
-<li><Link to="/register" className="register-btn">Register</Link></li>
-
-</ul>
-
-</nav>
-
-)
-
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

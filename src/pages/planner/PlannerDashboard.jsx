@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../../styles/planner.css";
 
 function PlannerDashboard(){
@@ -43,34 +42,6 @@ return(
 <div className="stat-card">
 <h3>✅ Completed Events</h3>
 <p>5</p>
-</div>
-
-</div>
-
-{/* Quick Actions */}
-
-<div className="card">
-
-<h3>⚡ Quick Actions</h3>
-
-<div className="action-buttons">
-
-<Link to="/planner/create-event">
-<button className="btn">Create Event</button>
-</Link>
-
-<Link to="/planner/create-task">
-<button className="btn">Create Task</button>
-</Link>
-
-<Link to="/planner/events">
-<button className="btn">View Events</button>
-</Link>
-
-<Link to="/planner/tasks">
-<button className="btn">View Tasks</button>
-</Link>
-
 </div>
 
 </div>

@@ -1,93 +1,70 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../styles/client.css";
+
+const BASE_URL = "http://localhost:8080/client";
 
 function EventDetails(){
 
-const { id } = useParams()
+const { id } = useParams();
 
-const event = {
-id:id,
-title:"Wedding Event",
-date:"20 March 2026",
-location:"Hyderabad",
-status:"In Progress",
-description:"A grand wedding celebration with decoration, catering and music arrangements."
+const [event,setEvent] = useState({});
+const [feedback,setFeedback] = useState("");
+
+/* Fetch Event Details */
+
+useEffect(()=>{
+
+fetch(BASE_URL + "/getevents")
+.then(res => res.json())
+.then(data => {
+
+const selectedEvent = data.find(e => e.id == id);
+setEvent(selectedEvent);
+
+})
+.catch(err => console.log(err));
+
+},[id]);
+
+/* Submit Feedback */
+
+const submitFeedback = () => {
+
+if(!feedback){
+alert("Please enter feedback");
+return;
 }
 
-const tasks = [
-{task:"Decoration Setup",status:"Completed"},
-{task:"Food Catering",status:"In Progress"},
-{task:"Sound System",status:"Pending"}
-]
+fetch(BASE_URL + "/event/" + id + "?feedback=" + feedback,{
+method:"PUT"
+})
+.then(res=>res.json())
+.then(()=>{
+alert("Feedback Submitted Successfully");
+setFeedback("");
+})
+.catch(err=>console.log(err));
 
-const [feedback,setFeedback] = useState("")
-
-const submitFeedback=()=>{
-alert("Feedback Submitted Successfully")
-setFeedback("")
-}
+};
 
 return(
 
 <div className="event-details-container">
 
-{/* Event Info */}
+{/* Event Information */}
 
 <div className="event-info-card">
 
-<h2>{event.title}</h2>
+<h2>{event?.title}</h2>
 
-<p><b>Date:</b> {event.date}</p>
+<p><b>Date:</b> {event?.date}</p>
 
-<p><b>Location:</b> {event.location}</p>
+<p><b>Location:</b> {event?.location}</p>
 
-<p><b>Status:</b> 
-<span className={`status ${event.status.replace(" ","").toLowerCase()}`}>
-{event.status}
-</span>
-</p>
+<p><b>Status:</b> {event?.status}</p>
 
-<p>{event.description}</p>
-
-</div>
-
-{/* Event Tasks */}
-
-<div className="card">
-
-<h3>Event Tasks Progress</h3>
-
-<table className="task-table">
-
-<thead>
-
-<tr>
-<th>Task</th>
-<th>Status</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-{tasks.map((task,index)=>(
-<tr key={index}>
-
-<td>{task.task}</td>
-
-<td>
-<span className={`status ${task.status.replace(" ","").toLowerCase()}`}>
-{task.status}
-</span>
-</td>
-
-</tr>
-))}
-
-</tbody>
-
-</table>
+<p>{event?.description}</p>
 
 </div>
 
@@ -103,7 +80,11 @@ value={feedback}
 onChange={(e)=>setFeedback(e.target.value)}
 />
 
-<button className="btn" onClick={submitFeedback}>
+<button 
+type="button"
+className="btn"
+onClick={submitFeedback}
+>
 Submit Feedback
 </button>
 

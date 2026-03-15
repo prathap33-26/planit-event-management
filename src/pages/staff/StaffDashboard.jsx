@@ -3,185 +3,141 @@ import "../../styles/staff.css";
 
 function StaffDashboard() {
 
-const [search,setSearch] = useState("");
+  const staffName = "Prathap";
+  const staffRole = "Event Coordinator";
 
-const [tasks,setTasks] = useState([
-{
-id:1,
-title:"Decoration Setup",
-event:"Wedding Event",
-priority:"High",
-dueDate:"20 March 2026",
-status:"Pending"
-},
-{
-id:2,
-title:"Food Arrangement",
-event:"Birthday Party",
-priority:"Medium",
-dueDate:"22 March 2026",
-status:"In Progress"
-},
-{
-id:3,
-title:"Sound System Setup",
-event:"Corporate Meeting",
-priority:"Low",
-dueDate:"18 March 2026",
-status:"Completed"
-}
-]);
+  const [tasks, setTasks] = useState([
+    { id: 1, task: "Decoration Setup",    event: "Wedding Event",     due: "20 March", priority: "high",   status: "Pending"     },
+    { id: 2, task: "Food Arrangement",    event: "Corporate Meeting", due: "22 March", priority: "medium", status: "Completed"   },
+    { id: 3, task: "Sound System",        event: "Birthday Party",    due: "25 March", priority: "high",   status: "In Progress" },
+    { id: 4, task: "Guest Registration",  event: "Wedding Event",     due: "20 March", priority: "low",    status: "Pending"     },
+    { id: 5, task: "Venue Cleanup",       event: "Birthday Party",    due: "25 March", priority: "medium", status: "Pending"     },
+  ]);
 
-const updateStatus=(id,newStatus)=>{
+  const [search, setSearch] = useState("");
 
-const updatedTasks = tasks.map(task=>{
-if(task.id===id){
-return {...task,status:newStatus}
-}
-return task
-});
+  const totalTasks     = tasks.length;
+  const completedTasks = tasks.filter(t => t.status === "Completed").length;
+  const pendingTasks   = tasks.filter(t => t.status === "Pending").length;
+  const inProgressTasks = tasks.filter(t => t.status === "In Progress").length;
 
-setTasks(updatedTasks);
+  const handleStatusChange = (id, newStatus) => {
+    setTasks(tasks.map(t => t.id === id ? { ...t, status: newStatus } : t));
+  };
 
-}
+  const filteredTasks = tasks.filter(t =>
+    t.task.toLowerCase().includes(search.toLowerCase()) ||
+    t.event.toLowerCase().includes(search.toLowerCase())
+  );
 
-const filteredTasks = tasks.filter(task =>
-task.event.toLowerCase().includes(search.toLowerCase())
-);
+  return (
+    <div className="staff-container">
 
-return(
+      {/* HEADER */}
+      <div className="staff-header">
+        <h2>👋 Welcome back, {staffName}!</h2>
 
-<div className="staff-container">
+        {/* STAFF INFO */}
+        <div className="staff-info">
+          <h3>👤 {staffName}</h3>
+          <p>🎯 Role: {staffRole}</p>
+          <p>📅 {new Date().toDateString()}</p>
+        </div>
+      </div>
 
-{/* Header */}
+      {/* SUMMARY CARDS */}
+      <div className="task-summary">
 
-<div className="staff-header">
+        <div className="summary-card">
+          <h4>📋 Total Tasks</h4>
+          <p>{totalTasks}</p>
+        </div>
 
-<h2>📋 Staff Task Dashboard</h2>
+        <div className="summary-card">
+          <h4>✅ Completed</h4>
+          <p>{completedTasks}</p>
+        </div>
 
-<div className="staff-info">
-<h3>Welcome Staff</h3>
-<p>Staff ID : S102</p>
-<p>Role : Event Staff</p>
-</div>
+        <div className="summary-card">
+          <h4>🔄 In Progress</h4>
+          <p>{inProgressTasks}</p>
+        </div>
 
-</div>
+        <div className="summary-card">
+          <h4>⏳ Pending</h4>
+          <p>{pendingTasks}</p>
+        </div>
 
-{/* Task Summary */}
+      </div>
 
-<div className="task-summary">
+      {/* TASK TABLE */}
+      <div className="card">
 
-<div className="summary-card">
-<h4>Total Tasks</h4>
-<p>{tasks.length}</p>
-</div>
+        <h3>📝 My Tasks</h3>
 
-<div className="summary-card">
-<h4>Completed</h4>
-<p>{tasks.filter(t => t.status==="Completed").length}</p>
-</div>
+        {/* SEARCH */}
+        <input
+          type="text"
+          className="search-box"
+          placeholder="🔍 Search by task or event..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
-<div className="summary-card">
-<h4>Pending</h4>
-<p>{tasks.filter(t => t.status==="Pending").length}</p>
-</div>
+        <table className="staff-task-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Task</th>
+              <th>Event</th>
+              <th>Due Date</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredTasks.length > 0 ? filteredTasks.map(t => (
+              <tr key={t.id}>
+                <td>{t.id}</td>
+                <td>{t.task}</td>
+                <td>{t.event}</td>
+                <td>{t.due}</td>
+                <td>
+                  <span className={`priority ${t.priority}`}>
+                    {t.priority.charAt(0).toUpperCase() + t.priority.slice(1)}
+                  </span>
+                </td>
+                <td>
+                  <span className={`status ${t.status.toLowerCase().replace(" ", "")}`}>
+                    {t.status}
+                  </span>
+                </td>
+                <td>
+                  <select
+                    value={t.status}
+                    onChange={(e) => handleStatusChange(t.id, e.target.value)}
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan="7" style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>
+                  No tasks found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
 
-<div className="summary-card">
-<h4>In Progress</h4>
-<p>{tasks.filter(t => t.status==="In Progress").length}</p>
-</div>
+      </div>
 
-</div>
-
-{/* Search */}
-
-<input
-type="text"
-placeholder="Search by event name..."
-className="search-box"
-value={search}
-onChange={(e)=>setSearch(e.target.value)}
-/>
-
-{/* Task Table */}
-
-<div className="card">
-
-<table className="staff-task-table">
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Task</th>
-<th>Event</th>
-<th>Priority</th>
-<th>Due Date</th>
-<th>Status</th>
-<th>Update Status</th>
-</tr>
-</thead>
-
-<tbody>
-
-{filteredTasks.map(task=>(
-
-<tr key={task.id}>
-
-<td>{task.id}</td>
-
-<td>{task.title}</td>
-
-<td>{task.event}</td>
-
-<td>
-<span className={`priority ${task.priority.toLowerCase()}`}>
-{task.priority}
-</span>
-</td>
-
-<td>{task.dueDate}</td>
-
-<td>
-<span className={`status ${task.status.replace(" ","").toLowerCase()}`}>
-{task.status}
-</span>
-</td>
-
-<td>
-
-<select
-onChange={(e)=>updateStatus(task.id,e.target.value)}
-value={task.status}
->
-
-<option>Pending</option>
-<option>In Progress</option>
-<option>Completed</option>
-
-</select>
-
-</td>
-
-</tr>
-
-))}
-
-</tbody>
-
-</table>
-
-</div>
-
-{/* Logout */}
-
-<div className="logout-section">
-<button className="logout-btn">Logout</button>
-</div>
-
-</div>
-
-)
-
+    </div>
+  );
 }
 
 export default StaffDashboard;

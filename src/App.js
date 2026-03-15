@@ -7,7 +7,7 @@ import Register from "./pages/auth/Register";
 
 import PlannerDashboard from "./pages/planner/PlannerDashboard";
 import CreateEvent from "./pages/planner/CreateEvent";
-import PlannerEventList from "./pages/planner/EventList";
+import PlannerEventList from "./pages/planner/ViewEvents";
 import CreateTask from "./pages/planner/CreateTask";
 import TaskList from "./pages/planner/TaskList";
 
