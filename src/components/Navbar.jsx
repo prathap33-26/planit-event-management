@@ -28,7 +28,7 @@ function Navbar() {
     localStorage.removeItem("loggedInUser");
     setRole("");
     window.dispatchEvent(new Event("roleChanged"));
-    navigate("/login");
+    navigate("/");
   }
 
   return (
