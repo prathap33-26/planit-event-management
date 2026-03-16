@@ -1,79 +1,117 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/planner.css";
 
-function CreateEvent(){
+function CreateEvent() {
 
-const [event,setEvent] = useState({
-title:"",
-date:"",
-location:"",
-description:"",
-status:"Planned"
-})
+  const navigate = useNavigate();
 
-const handleChange=(e)=>{
-setEvent({
-...event,
-[e.target.name]:e.target.value
-})
-}
+  const [event, setEvent] = useState({
+    title: "",
+    date: "",
+    location: "",
+    description: "",
+    status: "Planned"
+  });
 
-const handleSubmit=(e)=>{
-e.preventDefault()
+  const handleChange = (e) => {
+    setEvent({ ...event, [e.target.name]: e.target.value });
+  };
 
-console.log("Event Created:",event)
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-alert("Event Created Successfully!")
-}
+    // ✅ Get existing events from localStorage
+    const existingEvents = JSON.parse(localStorage.getItem("events") || "[]");
 
-return(
+    // ✅ Create new event with unique id
+    const newEvent = {
+      ...event,
+      id: Date.now(), // unique id
+    };
 
-<div className="create-event-container">
+    // ✅ Add new event to the list
+    existingEvents.push(newEvent);
 
-  <div className="create-event-card">
+    // ✅ Save back to localStorage
+    localStorage.setItem("events", JSON.stringify(existingEvents));
 
-    <h2 className="create-title">Create New Event</h2>
+    alert("Event Created Successfully!");
 
-    <form onSubmit={handleSubmit}>
+    // ✅ Redirect to view events page
+    navigate("/planner/events");
+  };
 
-      <div className="form-group">
-        <label>Event Title</label>
-        <input type="text" name="title" placeholder="Enter event title" onChange={handleChange}/>
+  return (
+    <div className="create-event-container">
+      <div className="create-event-card">
+
+        <h2 className="create-title">Create New Event</h2>
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="form-group">
+            <label>Event Title</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter event title"
+              value={event.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Event Date</label>
+            <input
+              type="date"
+              name="date"
+              value={event.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              name="location"
+              placeholder="Enter location"
+              value={event.location}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              placeholder="Enter event description"
+              value={event.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Status</label>
+            <select name="status" value={event.status} onChange={handleChange}>
+              <option value="Planned">Planned</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <button type="submit" className="create-btn">Create Event</button>
+
+        </form>
+
       </div>
-
-      <div className="form-group">
-        <label>Event Date</label>
-        <input type="date" name="date" onChange={handleChange}/>
-      </div>
-
-      <div className="form-group">
-        <label>Location</label>
-        <input type="text" name="location" placeholder="Enter location" onChange={handleChange}/>
-      </div>
-
-      <div className="form-group">
-        <label>Description</label>
-        <textarea name="description" placeholder="Enter event description" onChange={handleChange}/>
-      </div>
-
-      <div className="form-group">
-        <label>Status</label>
-        <select name="status" onChange={handleChange}>
-          <option>Planned</option>
-          <option>In Progress</option>
-          <option>Completed</option>
-        </select>
-      </div>
-
-      <button className="create-btn">Create Event</button>
-
-    </form>
-
-  </div>
-
-</div>
-)
-
+    </div>
+  );
 }
 
 export default CreateEvent;

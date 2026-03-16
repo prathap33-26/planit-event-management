@@ -1,131 +1,137 @@
+import { useEffect, useState } from "react";
 import "../../styles/planner.css";
 
-function PlannerDashboard(){
+function PlannerDashboard() {
 
-const events = [
-{ id:1, title:"Wedding Event", date:"20 March", status:"Planned"},
-{ id:2, title:"Corporate Meeting", date:"22 March", status:"In Progress"},
-{ id:3, title:"Birthday Party", date:"25 March", status:"Completed"}
-];
+  const [events, setEvents] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-const tasks = [
-{ id:1, task:"Decoration Setup", staff:"Prathap", status:"Pending"},
-{ id:2, task:"Food Arrangement", staff:"Lalitha", status:"Completed"},
-{ id:3, task:"Sound System", staff:"Tharun", status:"In Progress"}
-];
+  // ✅ Fixed: hardcode all 8 staff members
+  const totalStaff = 8;
 
-return(
+  // ✅ Load events and tasks from localStorage
+  useEffect(() => {
+    const storedEvents = JSON.parse(localStorage.getItem("events") || "[]");
+    const storedTasks  = JSON.parse(localStorage.getItem("tasks")  || "[]");
+    setEvents(storedEvents);
+    setTasks(storedTasks);
+  }, []);
 
-<div className="planner-dashboard">
+  // ✅ Dynamic statistics
+  const totalEvents     = events.length;
+  const completedEvents = events.filter(e => e.status === "Completed").length;
+  const totalTasks      = tasks.length;
 
-<h2>📊 Planner Dashboard</h2>
+  // ✅ Show only last 3 recent events
+  const recentEvents = events.slice(-3).reverse();
 
-{/* Statistics */}
+  // ✅ Show only last 3 recent tasks
+  const recentTasks = tasks.slice(-3).reverse();
 
-<div className="stats-grid">
+  return (
+    <div className="planner-dashboard">
 
-<div className="stat-card">
-<h3>🎉 Total Events</h3>
-<p>12</p>
-</div>
+      <h2>📊 Planner Dashboard</h2>
 
-<div className="stat-card">
-<h3>📋 Total Tasks</h3>
-<p>25</p>
-</div>
+      {/* Statistics */}
+      <div className="stats-grid">
 
-<div className="stat-card">
-<h3>👨‍💼 Staff Members</h3>
-<p>8</p>
-</div>
+        <div className="stat-card">
+          <h3>🎉 Total Events</h3>
+          <p>{totalEvents}</p>
+        </div>
 
-<div className="stat-card">
-<h3>✅ Completed Events</h3>
-<p>5</p>
-</div>
+        <div className="stat-card">
+          <h3>📋 Total Tasks</h3>
+          <p>{totalTasks}</p>
+        </div>
 
-</div>
+        <div className="stat-card">
+          <h3>👨‍💼 Staff Members</h3>
+          <p>{totalStaff}</p>   {/* ✅ Always shows 8 */}
+        </div>
 
-{/* Recent Events */}
+        <div className="stat-card">
+          <h3>✅ Completed Events</h3>
+          <p>{completedEvents}</p>
+        </div>
 
-<div className="card">
+      </div>
 
-<h3>📅 Recent Events</h3>
+      {/* Recent Events */}
+      <div className="card">
+        <h3>📅 Recent Events</h3>
 
-<table className="table">
+        {recentEvents.length === 0 ? (
+          <p style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>
+            No events yet. Click "Create Event" to add one!
+          </p>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentEvents.map((e, index) => (
+                <tr key={e.id}>
+                  <td>{index + 1}</td>
+                  <td>{e.title}</td>
+                  <td>{e.date}</td>
+                  <td>
+                    <span className={`status ${e.status.toLowerCase().replace(" ", "")}`}>
+                      {e.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
-<thead>
-<tr>
-<th>ID</th>
-<th>Title</th>
-<th>Date</th>
-<th>Status</th>
-</tr>
-</thead>
+      {/* Task Overview */}
+      <div className="card">
+        <h3>📝 Task Overview</h3>
 
-<tbody>
+        {recentTasks.length === 0 ? (
+          <p style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>
+            No tasks yet. Click "Create Task" to add one!
+          </p>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Staff</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentTasks.map((t, index) => (
+                <tr key={t.id}>
+                  <td>{index + 1}</td>
+                  <td>{t.title}</td>
+                  <td>{t.staff}</td>
+                  <td>
+                    <span className={`status ${t.status.toLowerCase().replace(" ", "")}`}>
+                      {t.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
-{events.map(e=>(
-<tr key={e.id}>
-<td>{e.id}</td>
-<td>{e.title}</td>
-<td>{e.date}</td>
-<td>
-<span className={`status ${e.status.toLowerCase().replace(" ","")}`}>
-{e.status}
-</span>
-</td>
-</tr>
-))}
-
-</tbody>
-
-</table>
-
-</div>
-
-{/* Task Overview */}
-
-<div className="card">
-
-<h3>📝 Task Overview</h3>
-
-<table className="table">
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Task</th>
-<th>Staff</th>
-<th>Status</th>
-</tr>
-</thead>
-
-<tbody>
-
-{tasks.map(t=>(
-<tr key={t.id}>
-<td>{t.id}</td>
-<td>{t.task}</td>
-<td>{t.staff}</td>
-<td>
-<span className={`status ${t.status.toLowerCase().replace(" ","")}`}>
-{t.status}
-</span>
-</td>
-</tr>
-))}
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-)
-
+    </div>
+  );
 }
 
 export default PlannerDashboard;

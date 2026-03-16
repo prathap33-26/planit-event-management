@@ -21,22 +21,38 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const roleValue = form.role.toLowerCase(); // "planner", "staff", "client"
+    // Find user from registered list
+    const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+    const matchedUser = registeredUsers.find(
+      (u) =>
+        u.email === form.email &&
+        u.password === form.password &&
+        u.role === form.role
+    );
 
-    localStorage.setItem("role", roleValue);        // 👈 Save to localStorage
-    window.dispatchEvent(new Event("roleChanged")); // 👈 Notify Navbar to update
+    if (!matchedUser) {
+      alert("Invalid credentials! Please check your email, password and role.");
+      return;
+    }
+
+    const roleValue = form.role.toLowerCase();
+
+    localStorage.setItem("role", roleValue);
+    localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
+    window.dispatchEvent(new Event("roleChanged"));
 
     setIsLoggedIn(true);
     setLoggedInRole(form.role);
 
     if (form.role === "PLANNER") navigate("/planner");
     else if (form.role === "STAFF") navigate("/staff");
-    else navigate("/home");
+    else navigate("/");   // ✅ Fixed: was "/home", correct route is "/"
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("role");               // 👈 Clear localStorage
-    window.dispatchEvent(new Event("roleChanged")); // 👈 Notify Navbar to update
+    localStorage.removeItem("role");
+    localStorage.removeItem("loggedInUser");
+    window.dispatchEvent(new Event("roleChanged"));
 
     setIsLoggedIn(false);
     setLoggedInRole("");
@@ -56,6 +72,7 @@ function Login() {
           </p>
 
           <form onSubmit={handleSubmit}>
+
             <label>Email</label>
             <input
               type="email"
@@ -64,6 +81,7 @@ function Login() {
               value={form.email}
               onChange={handleChange}
               disabled={isLoggedIn}
+              required
             />
 
             <label>Password</label>
@@ -74,6 +92,7 @@ function Login() {
               value={form.password}
               onChange={handleChange}
               disabled={isLoggedIn}
+              required
             />
 
             <label>Login As</label>
@@ -89,11 +108,7 @@ function Login() {
             </select>
 
             {isLoggedIn ? (
-              <button
-                type="button"
-                className="login-btn"
-                onClick={handleLogout}
-              >
+              <button type="button" className="login-btn" onClick={handleLogout}>
                 Logout
               </button>
             ) : (
@@ -101,6 +116,7 @@ function Login() {
                 Login
               </button>
             )}
+
           </form>
 
           {isLoggedIn && (

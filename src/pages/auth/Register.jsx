@@ -1,158 +1,163 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/auth.css";
 
-function Register(){
+function Register() {
 
-const [form,setForm] = useState({
-username:"",
-email:"",
-password:"",
-confirmPassword:"",
-role:"CLIENT"
-})
+  const navigate = useNavigate();
 
-const handleChange=(e)=>{
-setForm({
-...form,
-[e.target.name]:e.target.value
-})
-}
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "CLIENT"
+  });
 
-const handleSubmit=(e)=>{
-e.preventDefault()
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-if(form.password !== form.confirmPassword){
-alert("Passwords do not match")
-return
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-console.log("Register Data:",form)
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-alert("Registration Successful")
-}
+    // Save registered users to localStorage
+    const existingUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
 
-return(
+    // Check if email already exists
+    const alreadyExists = existingUsers.find(u => u.email === form.email);
+    if (alreadyExists) {
+      alert("Email already registered! Please login.");
+      return;
+    }
 
-<div className="auth-container">
+    existingUsers.push({
+      username: form.username,
+      email: form.email,
+      password: form.password,
+      role: form.role,
+    });
 
-<div className="login-box">
+    localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
 
-{/* LEFT SIDE REGISTER FORM */}
+    alert("Registration Successful! Redirecting to Login...");
 
-<div className="login-left">
+    // ✅ Redirect to login page
+    navigate("/login");
+  };
 
-<h2>Create Account</h2>
+  return (
+    <div className="auth-container">
+      <div className="login-box">
 
-<p className="login-desc">
-Register to start managing events with PlanIt
-</p>
+        {/* LEFT SIDE REGISTER FORM */}
+        <div className="login-left">
+          <h2>Create Account</h2>
+          <p className="login-desc">
+            Register to start managing events with PlanIt
+          </p>
 
-<form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
 
-<label>Username</label>
-<input
-type="text"
-name="username"
-placeholder="Enter username"
-onChange={handleChange}
-/>
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              value={form.username}
+              onChange={handleChange}
+              required
+            />
 
-<label>Email</label>
-<input
-type="email"
-name="email"
-placeholder="Enter email"
-onChange={handleChange}
-/>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
 
-<label>Password</label>
-<input
-type="password"
-name="password"
-placeholder="Enter password"
-onChange={handleChange}
-/>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
 
-<label>Confirm Password</label>
-<input
-type="password"
-name="confirmPassword"
-placeholder="Confirm password"
-onChange={handleChange}
-/>
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              required
+            />
 
-<label>Select Role</label>
-<select name="role" onChange={handleChange}>
-<option value="PLANNER">Planner</option>
-<option value="STAFF">Staff</option>
-<option value="CLIENT">Client</option>
-</select>
+            <label>Select Role</label>
+            <select name="role" value={form.role} onChange={handleChange}>
+              <option value="PLANNER">Planner</option>
+              <option value="STAFF">Staff</option>
+              <option value="CLIENT">Client</option>
+            </select>
 
-<button className="login-btn">
-Register
-</button>
+            <button type="submit" className="login-btn">
+              Register
+            </button>
 
-</form>
+          </form>
 
-<p className="login-footer">
-Already have an account?
-<Link to="/login"> Login here</Link>
-</p>
+          <p className="login-footer">
+            Already have an account?
+            <Link to="/login"> Login here</Link>
+          </p>
+        </div>
 
-</div>
+        {/* RIGHT SIDE FEATURES */}
+        <div className="login-right">
+          <h2>Join PlanIt</h2>
+          <p className="feature-desc">
+            Create your account and start organizing events efficiently
+          </p>
 
-{/* RIGHT SIDE FEATURES */}
+          <div className="feature-card">
+            <div className="feature-icon">📅</div>
+            <div>
+              <h4>Event Planning</h4>
+              <p>Create and manage events easily</p>
+            </div>
+          </div>
 
-<div className="login-right">
+          <div className="feature-card">
+            <div className="feature-icon">👨‍💼</div>
+            <div>
+              <h4>Staff Management</h4>
+              <p>Assign and monitor staff tasks</p>
+            </div>
+          </div>
 
-<h2>Join PlanIt</h2>
+          <div className="feature-card">
+            <div className="feature-icon">💬</div>
+            <div>
+              <h4>Client Interaction</h4>
+              <p>Collect feedback and improve services</p>
+            </div>
+          </div>
+        </div>
 
-<p className="feature-desc">
-Create your account and start organizing events efficiently
-</p>
-
-<div className="feature-card">
-
-<div className="feature-icon">📅</div>
-
-<div>
-<h4>Event Planning</h4>
-<p>Create and manage events easily</p>
-</div>
-
-</div>
-
-<div className="feature-card">
-
-<div className="feature-icon">👨‍💼</div>
-
-<div>
-<h4>Staff Management</h4>
-<p>Assign and monitor staff tasks</p>
-</div>
-
-</div>
-
-<div className="feature-card">
-
-<div className="feature-icon">💬</div>
-
-<div>
-<h4>Client Interaction</h4>
-<p>Collect feedback and improve services</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-)
-
+      </div>
+    </div>
+  );
 }
 
 export default Register;

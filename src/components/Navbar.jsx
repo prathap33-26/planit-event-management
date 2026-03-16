@@ -12,10 +12,10 @@ function Navbar() {
       setRole(userRole || "");
     };
 
-    syncRole(); // Run on mount
+    syncRole();
 
-    window.addEventListener("roleChanged", syncRole); // Listen for login/logout
-    window.addEventListener("storage", syncRole);     // Listen for cross-tab changes
+    window.addEventListener("roleChanged", syncRole);
+    window.addEventListener("storage", syncRole);
 
     return () => {
       window.removeEventListener("roleChanged", syncRole);
@@ -25,14 +25,32 @@ function Navbar() {
 
   function logout() {
     localStorage.removeItem("role");
+    localStorage.removeItem("loggedInUser");
     setRole("");
-    window.dispatchEvent(new Event("roleChanged")); // Notify navbar
-    navigate("/");
+    window.dispatchEvent(new Event("roleChanged"));
+    navigate("/login");
   }
 
   return (
     <nav className="navbar">
-      <h2 className="logo">PlanIt</h2>
+
+      {/* ✅ LOGO */}
+      <div className="nav-logo">
+        <svg
+          width="36"
+          height="36"
+          viewBox="0 0 36 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="36" height="36" rx="10" fill="#6366f1" />
+          <path d="M10 10h6v16h-6z" fill="white" />
+          <path d="M10 10h12v6H10z" fill="white" />
+          <circle cx="26" cy="24" r="5" fill="white" />
+          <path d="M24 24l1.5 1.5L28 22" stroke="#6366f1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <h2>PlanIt</h2>
+      </div>
 
       <div className="nav-links">
 
@@ -50,7 +68,6 @@ function Navbar() {
           <>
             <Link to="/">Home</Link>
             <Link to="/events">Events</Link>
-            <Link to="/events">View Events</Link>
             <button onClick={logout}>Logout</button>
           </>
         )}
@@ -71,7 +88,6 @@ function Navbar() {
         {role === "staff" && (
           <>
             <Link to="/staff">Dashboard</Link>
-            <Link to="/staff/tasks">My Tasks</Link>
             <button onClick={logout}>Logout</button>
           </>
         )}
